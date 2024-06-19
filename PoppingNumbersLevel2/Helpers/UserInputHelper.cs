@@ -1,37 +1,17 @@
-﻿
-namespace PoppingNumbersLevel2.Helpers
+﻿namespace PoppingNumbersLevel2.Helpers
 {
     public static class UserInputHelper
     {
-        public static int GetValidUserInputNumberFromTo(string message, int from, int to)
+        public static int GetValidUserInputNumber(string message, int max, int min = 1)
         {
             while (true)
             {
-                Console.Write($"{message} ({from}-{to}): ");
+                Console.Write($"{message} ({min}-{max}): ");
                 var numberInput = Console.ReadLine();
 
                 if (int.TryParse(numberInput, out var result))
                 {
-                    if (result >= from && result <= to)
-                    {
-                        return result;
-                    }
-                }
-
-                Console.WriteLine("Invalid input, try again.");
-            }
-        }
-
-        public static int GetValidUserInputTo(string message, int max)
-        {
-            while (true)
-            {
-                Console.Write($"Enter {message} (1 - {max}): ");
-                var numberInput = Console.ReadLine();
-
-                if (int.TryParse(numberInput, out var result))
-                {
-                    if (result >= 1 && result <= max)
+                    if (result >= min && result <= max)
                     {
                         return result;
                     }

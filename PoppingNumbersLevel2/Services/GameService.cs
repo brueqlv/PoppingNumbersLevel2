@@ -73,8 +73,6 @@ namespace PoppingNumbersLevel2.Services
             }
 
             Console.WriteLine("Game Over! No more spaces left.");
-            Console.ReadLine();
-
             return true;
         }
 

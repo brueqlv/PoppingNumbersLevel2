@@ -16,14 +16,14 @@ namespace PoppingNumbersLevel2
 
             var userName = UserInputHelper.GetValidUserName();
 
-            var deskWidth = UserInputHelper.GetValidUserInputNumberFromTo("Enter board desk width", minDeskSize, maxDeskSize);
-            var deskHeight = UserInputHelper.GetValidUserInputNumberFromTo("Enter board desk height", minDeskSize, maxDeskSize);
+            var deskWidth = UserInputHelper.GetValidUserInputNumber("Enter board desk width", maxDeskSize, minDeskSize);
+            var deskHeight = UserInputHelper.GetValidUserInputNumber("Enter board desk height", maxDeskSize, minDeskSize);
 
             var gameBoard = new GameBoard(deskWidth, deskHeight);
             var gameService = new GameService(gameBoard);
 
-            var gameNumbersFrom = UserInputHelper.GetValidUserInputNumberFromTo("Enter min game number", minGameNumber, maxGameNumber);
-            var gameNumbersTo = UserInputHelper.GetValidUserInputNumberFromTo("Enter max game number", minGameNumber, maxGameNumber);
+            var gameNumbersFrom = UserInputHelper.GetValidUserInputNumber("Enter min game number", maxGameNumber, minGameNumber);
+            var gameNumbersTo = UserInputHelper.GetValidUserInputNumber("Enter max game number", maxGameNumber, minGameNumber);
 
             var gameNumbers = new GameNumbers(gameNumbersFrom, gameNumbersTo);
 
@@ -34,9 +34,9 @@ namespace PoppingNumbersLevel2
 
                 gameService.PrintBoard();
 
-                var number = UserInputHelper.GetValidUserInputNumberFromTo("Enter a number", gameNumbers.From, gameNumbers.To);
-                var row = UserInputHelper.GetValidUserInputTo("row", gameBoard.Height);
-                var col = UserInputHelper.GetValidUserInputTo("col", gameBoard.Width);
+                var number = UserInputHelper.GetValidUserInputNumber("Enter a number", gameNumbers.To, gameNumbers.From);
+                var row = UserInputHelper.GetValidUserInputNumber("Enter row", gameBoard.Height);
+                var col = UserInputHelper.GetValidUserInputNumber("Enter col", gameBoard.Width);
 
                 gameService.PlayerTurn(number, row, col);
 
@@ -45,7 +45,7 @@ namespace PoppingNumbersLevel2
                     break;
                 }
 
-                gameService.ComputerTurn(minGameNumber, maxGameNumber);
+                gameService.ComputerTurn(gameNumbersFrom, gameNumbersTo);
 
                 score += gameService.ClearConnectedNumbers();
 
