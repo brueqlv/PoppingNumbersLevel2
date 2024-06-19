@@ -15,7 +15,7 @@ namespace PoppingNumbersLevel2.Services
 
                 for (var j = 0; j < gameBoard.Width; j++)
                 {
-                    sb1.Add(gameBoard.Board[i, j] == 0 ? "   " : " " + gameBoard.Board[i, j] + " ");
+                    sb1.Add(gameBoard.Board[i, j] == null ? "   " : " " + gameBoard.Board[i, j] + " ");
                     lines.Add("---");
                 }
 
@@ -28,11 +28,11 @@ namespace PoppingNumbersLevel2.Services
             }
         }
 
-        public void PlayerTurn(int number, int row, int col)
+        public void PlayerTurn(string number, int row, int col)
         {
             while (true)
             {
-                if (gameBoard.Board[row - 1, col - 1] == 0)
+                if (gameBoard.Board[row - 1, col - 1] == null)
                 {
                     gameBoard.Board[row - 1, col - 1] = number;
                     break;
@@ -46,14 +46,14 @@ namespace PoppingNumbersLevel2.Services
         {
             var numbersPlaced = 0;
 
-            while (numbersPlaced < 3)
+            while (numbersPlaced < 3 || IsGameOver())
             {
                 var row = _gameRandom.Next(gameBoard.Height);
                 var col = _gameRandom.Next(gameBoard.Width);
 
-                if (gameBoard.Board[row, col] == 0)
+                if (gameBoard.Board[row, col] == null)
                 {
-                    gameBoard.Board[row, col] = _gameRandom.Next(minGameNumber, maxGameNumber + 1);
+                    gameBoard.Board[row, col] = _gameRandom.Next(minGameNumber, maxGameNumber + 1).ToString();
                     numbersPlaced++;
                 }
             }
@@ -65,14 +65,13 @@ namespace PoppingNumbersLevel2.Services
             {
                 for (var j = 0; j < gameBoard.Width; j++)
                 {
-                    if (gameBoard.Board[i, j] == 0)
+                    if (gameBoard.Board[i, j] == null)
                     {
                         return false;
                     }
                 }
             }
 
-            Console.WriteLine("Game Over! No more spaces left.");
             return true;
         }
 
@@ -105,7 +104,7 @@ namespace PoppingNumbersLevel2.Services
         private void MarkConnectedCells(bool[,] toClear, int startRow, int startCol, int rowIncrement, int colIncrement)
         {
             var current = gameBoard.Board[startRow, startCol];
-            if (current == 0) return;
+            if (current == null) return;
 
             var count = 1;
             var row = startRow + rowIncrement;
@@ -141,7 +140,7 @@ namespace PoppingNumbersLevel2.Services
                 {
                     if (toClear[i, j])
                     {
-                        gameBoard.Board[i, j] = 0;
+                        gameBoard.Board[i, j] = null;
                         clearedCells++;
                     }
                 }

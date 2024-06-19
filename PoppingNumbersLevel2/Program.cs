@@ -34,7 +34,7 @@ namespace PoppingNumbersLevel2
 
                 gameService.PrintBoard();
 
-                var number = UserInputHelper.GetValidUserInputNumber("Enter a number", gameNumbers.To, gameNumbers.From);
+                var number = UserInputHelper.GetValidUserInputNumber("Enter a number", gameNumbers.To, gameNumbers.From).ToString();
                 var row = UserInputHelper.GetValidUserInputNumber("Enter row", gameBoard.Height);
                 var col = UserInputHelper.GetValidUserInputNumber("Enter col", gameBoard.Width);
 
@@ -54,6 +54,9 @@ namespace PoppingNumbersLevel2
                     break;
                 }
             }
+
+            Console.WriteLine("Game Over! No more spaces left.");
+            Console.ReadLine();
         }
     }
 }
