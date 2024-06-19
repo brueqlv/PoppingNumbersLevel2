@@ -25,8 +25,6 @@ namespace PoppingNumbersLevel2
             var gameNumbersFrom = UserInputHelper.GetValidUserInputNumber("Enter min game number", maxGameNumber, minGameNumber);
             var gameNumbersTo = UserInputHelper.GetValidUserInputNumber("Enter max game number", maxGameNumber, minGameNumber);
 
-            var gameNumbers = new GameNumbers(gameNumbersFrom, gameNumbersTo);
-
             while (true)
             {
                 Console.Clear();
@@ -34,7 +32,7 @@ namespace PoppingNumbersLevel2
 
                 gameService.PrintBoard();
 
-                var number = UserInputHelper.GetValidUserInputNumber("Enter a number", gameNumbers.To, gameNumbers.From).ToString();
+                var number = UserInputHelper.GetValidUserInputNumber("Enter a number", gameNumbersTo, gameNumbersFrom).ToString();
                 var row = UserInputHelper.GetValidUserInputNumber("Enter row", gameBoard.Height);
                 var col = UserInputHelper.GetValidUserInputNumber("Enter col", gameBoard.Width);
 
